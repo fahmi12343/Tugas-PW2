@@ -6,6 +6,7 @@ use App\Transaction;
 use App\Barang;
 use App\Detilpesan;
 use App\Pelanggan;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -77,6 +78,13 @@ class TransactionController extends Controller
 
     }
 
+    public function cetak_pdf()
+    {
+    	$transaction = Transaction::all();
+
+    	$pdf = PDF::loadview('users.pdf.transaction_pdf',['transaction'=>$transaction]);
+    	return $pdf->download('laporan-transaksi-pdf');
+    }
 
     public function maxkode()
     {

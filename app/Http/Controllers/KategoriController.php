@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\KategoriExport;
 use Illuminate\Http\Request;
 use App\Kategori;
+use Barryvdh\DomPDF\Facade as PDF;
 use Exception;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class KategoriController extends Controller
 {
@@ -121,6 +125,19 @@ class KategoriController extends Controller
         }
 
     }
+
+    public function cetak_pdf()
+    {
+    	$kategori = Kategori::all();
+
+    	$pdf = PDF::loadview('users/kategori/pdf',['kategori'=>$kategori]);
+    	return $pdf->stream();
+    }
+
+    public function export_excel()
+	{
+		return Excel::download(new KategoriExport, 'kategori.xlsx');
+	}
 
     public function maxkode()
     {

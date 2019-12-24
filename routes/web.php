@@ -25,6 +25,8 @@ Route::post('/kategori', 'KategoriController@prosestambah')                     
 Route::get('/users/kategori/ubah/{KdKategori}', 'KategoriController@ubah')      ->name('ubahkategori');
 Route::post('/kategori/prosesubahkategori', 'KategoriController@prosesubah')    ->name('prosesubahkategori');
 Route::get('/users/kategori/delete/{KdKategori}', 'KategoriController@hapus');
+Route::get('/users/kategori/cetak_pdf', 'KategoriController@cetak_pdf')          ->name('pdf');
+Route::get('/user/kategori/export_excel', 'KategoriController@export_excel')                ->name('excel');
 
 
 

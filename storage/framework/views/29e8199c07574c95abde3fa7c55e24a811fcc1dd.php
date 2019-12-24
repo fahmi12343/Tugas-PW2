@@ -79,28 +79,29 @@
                                 </li>
                             <?php endif; ?>
                         <?php else: ?>
+                        
                         <a class="nav-link" href="<?php echo e(route ('transaction')); ?>">Pesan Barang</a>
                         <a class="nav-link" href="<?php echo e(route ('barang')); ?>">Barang</a>
                         <a class="nav-link" href="<?php echo e(route ('kategori')); ?>" >Kategori</a>
                         <a class="nav-link" href="<?php echo e(route ('pelanggan')); ?>">Pelanggan</a>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    <?php echo e(__('Logout')); ?>
+
                                 </a>
+                                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                                    <?php echo csrf_field(); ?>
+                                </form>
+                            </div>
+                        </li>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        <?php echo e(__('Logout')); ?>
 
-                                    </a>
-
-                                    <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
-                                        <?php echo csrf_field(); ?>
-                                    </form>
-                                </div>
-                            </li>
                         <?php endif; ?>
                     </ul>
                 </div>
@@ -112,11 +113,10 @@
         </main>
     </div>
 
-
-    <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
     <script type="text/javascript" src="<?php echo e(asset('jquery/jquery-3.4.1.js')); ?>"></script>
     
     <script type="text/javascript" src="<?php echo e(asset('js/bootstrap.min.js')); ?>"></script>
+    
 
 
     <script >

@@ -9,6 +9,8 @@
             <div class="col-md-12">
                 <button type="button" class="btn btn-outline-primary col-md-12 " data-toggle="modal" data-target="#exampleModalKategori" style="margin: 1%;padding: 1%"> ADD </button>
 
+            <a href="{{ route('pdf') }}" class="btn btn-primary" target="_blank">CETAK PDF</a>
+            <a href="{{ route('excelgi') }}" class="btn btn-primary" target="_blank">CETAK EXCEL</a>
                         <table align="center" class="table table-striped" style="margin: 1% ; padding: 1%">
                             <thead align="center">
                                 <tr>
