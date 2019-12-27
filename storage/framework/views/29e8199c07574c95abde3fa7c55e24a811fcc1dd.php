@@ -1,24 +1,29 @@
 <!doctype html>
 <html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
+
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title><?php echo e(config('app.name', 'Laravel')); ?></title>
+    <title><?php echo e(config('app.', 'Toko Barang')); ?></title>
 
     <!-- Scripts -->
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/font-awesome.min.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/bootstrap.min.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/font-awesome.min.css')); ?>">
+
     
 
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
     <!-- Styles -->
     <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
@@ -47,13 +52,14 @@
 
     </script>
 
+
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
-                    <?php echo e(config('app.name', 'Lukaririnki')); ?>
+                <a class="navbar-brand" href="<?php echo e(url('dashboard')); ?>">
+                    <?php echo e(config('app.', 'Toko Barang Lukaririnki')); ?>
 
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
@@ -84,6 +90,19 @@
                         <a class="nav-link" href="<?php echo e(route ('barang')); ?>">Barang</a>
                         <a class="nav-link" href="<?php echo e(route ('kategori')); ?>" >Kategori</a>
                         <a class="nav-link" href="<?php echo e(route ('pelanggan')); ?>">Pelanggan</a>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre >Report</a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="<?php echo e(route('pdf')); ?>">
+                                    <?php echo e(__('Pdf')); ?>
+
+                                </a>
+                                <a class="dropdown-item" href="<?php echo e(route('excel')); ?>">
+                                    <?php echo e(__('Excel')); ?>
+
+                                </a>
+                            </div>
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
@@ -146,7 +165,6 @@
 
             $("#listPlg").change(function(){
                 var KdPlg = $(this).val();
-                    console.log(KdPlg);
 
                 $.ajax({
                     url: "/transaction/pelanggan",
@@ -166,10 +184,30 @@
                 })
             })
 
+
+                var KdPlg = $("#listPlg").val();
+                $.ajax({
+                    url: "/transaction/pelanggan",
+                    type: "POST",
+                    data: {"KdPlg":KdPlg,"_token":"<?php echo e(csrf_token()); ?>"},
+                    dataType: "json",
+                    success:function(data){
+                        // console.log(data);
+
+                        $("#AlamatPlg").html("");
+                        $("#AlamatPlg").html(data.AlamatPlg);
+                        $('#TelpPlg').val(data.TelpPlg);
+                    },
+                    error:function(x) {
+                        console.log(x.responseText);
+                    }
+                })
+
         })
     </script>
 
 
 </body>
+
 </html>
 <?php /**PATH C:\laragon\www\barang_0369\resources\views/layouts/app.blade.php ENDPATH**/ ?>

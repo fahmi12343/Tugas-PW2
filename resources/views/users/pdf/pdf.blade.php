@@ -15,7 +15,8 @@
 		}
 	</style>
 	<center>
-		<h5>Laporan Penjualan</h4>
+        <h3>Report Pembelian</h3>
+        <h5>Menampilkan Report Berdasarkan Nomor Pesan dan Pembelian Barang</h5>
 
 	</center>
 
@@ -23,8 +24,12 @@
 		<thead align="center">
             <tr>
                 <th>Nomor </th>
-                <th>Kode Kategori </th>
-                <th>Nama Kategori </th>
+                <th>Nomor Pesan </th>
+                <th>Tanggal Pesan` </th>
+                <th>Nama Barang </th>
+                <th>Jumlah Pesan </th>
+                <th>Harga Barang </th>
+                <th>Nama Pelanggan </th>
             </tr>
         </thead>
 
@@ -32,13 +37,17 @@
             @php
                 $nomor = 1;
             @endphp
-                @if(!empty($kategori) && $kategori->count())
-                @foreach($kategori as $key => $kategories)
+                @if(!empty($view) && $view->count())
+                @foreach($view as $key => $views)
 
                         <tr>
                             <td>{{ $nomor }}</td>
-                            <td>{{ $kategories -> KdKategori }}</td>
-                            <td>{{ $kategories -> NmKategori }}</td>
+                            <td>{{ $views -> NoPesan }}</td>
+                            <td>{{ $views -> TglPesan }}</td>
+                            <td>{{ $views -> NmBrg }}</td>
+                            <td>{{ $views -> JmlPesan }}</td>
+                            <td>{{ $views -> HargaBrg }}</td>
+                            <td>{{ $views -> NmPlg }}</td>
 
                         </tr>
 

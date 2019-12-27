@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Exports\KategoriExport;
 use Illuminate\Http\Request;
 use App\Kategori;
-use Barryvdh\DomPDF\Facade as PDF;
-use Exception;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class KategoriController extends Controller
 {
@@ -16,7 +14,7 @@ class KategoriController extends Controller
     {
 
         // $kategori   = DB::table('kategori')->simplePaginate(10);
-        // $kategori   = Kategori::all();
+
         $kategori   = Kategori::paginate(10);
         $kd = $this->maxkode();
         // mengirim data kategori ke view index
@@ -119,25 +117,13 @@ class KategoriController extends Controller
         }
         catch(Exception $x) {
             echo "  <script>
-                        alert('DATA SEDANG DIGUNAKAN DALAM BARANG.');
+                        alert('DATA SEDANG DIGUNAKAN Di RELASI BARANG.');
                         window.history.back();
                     </script>";
         }
 
     }
 
-    public function cetak_pdf()
-    {
-    	$kategori = Kategori::all();
-
-    	$pdf = PDF::loadview('users/kategori/pdf',['kategori'=>$kategori]);
-    	return $pdf->stream();
-    }
-
-    public function export_excel()
-	{
-		return Excel::download(new KategoriExport, 'kategori.xlsx');
-	}
 
     public function maxkode()
     {

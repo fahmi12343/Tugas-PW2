@@ -103,7 +103,7 @@ class PelangganController extends Controller
 
         // Cari data
         $pelanggan    = Pelanggan::findOrFail($id);
-        
+
             $pelanggan -> KdPlg     = $KdPlg;
             $pelanggan -> NmPlg     = $NmPlg;
             $pelanggan -> AlamatPlg = $AlamatPlg;

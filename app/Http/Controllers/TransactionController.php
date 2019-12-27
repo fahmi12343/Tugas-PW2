@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\DB;
 class TransactionController extends Controller
 {
 
-    function index()
+    function index(Request $request)
     {
+
 
         $transaction = Transaction::all();
 
@@ -25,11 +26,56 @@ class TransactionController extends Controller
        // $barang = Barang::paginate(2);
        $kd = $this->maxkode();
 
+
+       if(!empty($request->session()->get('keranjang'))) {
+            $keranjang = $request->session()->get('keranjang');
+       }
+       else {
+            $keranjang = "";
+       }
+
        // mengirim data kategori ke view index
        return view('users.transaction.index',['transaction' => $transaction])
+       ->with('keranjang',$keranjang)
        ->with('kd',$kd)
        ->with('barang',$barang)
        ->with('pelanggan',$pelanggan);
+
+
+    }
+
+    public function tambahkeranjang(Request $request)
+    {
+        if(!empty($request->session()->get('keranjang')))
+        {
+            $array = $request->session()->get('keranjang');
+            array_push($array,
+                            array(
+                                $request  -> get('NoPesan'),
+                                $request  -> get('KdBrg'),
+                                $request  -> get('HargaBrg'),
+                                $request  -> get('JmlPesan'),
+                                $request  -> get('TglPesan'),
+                                $request  -> get('KdPlg')
+                            )
+                );
+        }
+        else {
+            $array =    array(
+                                array(
+                                    $request  -> get('NoPesan'),
+                                    $request  -> get('KdBrg'),
+                                    $request  -> get('HargaBrg'),
+                                    $request  -> get('JmlPesan'),
+                                    $request  -> get('TglPesan'),
+                                    $request  -> get('KdPlg')
+                                )
+            );
+        }
+
+        $request->session() -> put('keranjang', $array);
+
+        return redirect ('/transaction');
 
     }
 
@@ -40,50 +86,46 @@ class TransactionController extends Controller
         // var_dump($request->get('KdPlg'));
         // die;
 
-
-        $NoPesan    = $request  -> get('NoPesan');
-        $TglPesan   = $request  -> get('TglPesan');
-        $KdPlg      = $request  -> get('KdPlg');
+        $NoPesan    = $request  -> get('0');
+        $TglPesan   = $request  -> get('4');
+        $KdPlg      = $request  -> get('5');
 
         // tambah data
         $transaction = new Transaction();
 
-            $transaction-> NoPesan      = $NoPesan;
-            $transaction-> TglPesan     = $TglPesan;
-            $transaction-> KdPlg        = $KdPlg;
+        $transaction-> NoPesan      = $NoPesan[0];
+        $transaction-> TglPesan     = $TglPesan[0];
+        $transaction-> KdPlg        = $KdPlg[0];
 
 
+        $KdBrg      = $request  -> get('1');
+        $JmlPesan   = $request  -> get('3');
+        $HargaBrg   = $request  -> get('2');
+        // $stok      = $request  -> get('stok');
 
-        $KdBrg      = $request  -> get('KdBrg');
-        $JmlPesan   = $request  -> get('JmlPesan');
-        $HargaBrg   = $request  -> get('HargaBrg');
-        $stok      = $request  -> get('stok');
 
-        // tambah data
-        $transactions = new  Detilpesan();
+        for($i=0 ; $i < count($KdBrg) ; $i++)
+        {
+            // tambah data
+            $transactions = new  Detilpesan();
 
-            $transactions-> NoPesan  = $NoPesan;
-            $transactions-> KdBrg    = $KdBrg;
-            $transactions-> JmlPesan = $JmlPesan;
-            $transactions-> HargaBrg = $HargaBrg;
+            $transactions-> NoPesan  = $NoPesan[$i];
+            $transactions-> KdBrg    = $KdBrg[$i];
+            $transactions-> JmlPesan = $JmlPesan[$i];
+            $transactions-> HargaBrg = $HargaBrg[$i];
 
+            $transactions->save();
+        }
 
         $transaction->save();
-        $transactions->save();
+
+        $request->session()->forget('keranjang');
 
         return redirect()->route('transaction')
                          ->with('success', 'Show is successfully saved');
 
 
 
-    }
-
-    public function cetak_pdf()
-    {
-    	$transaction = Transaction::all();
-
-    	$pdf = PDF::loadview('users.pdf.transaction_pdf',['transaction'=>$transaction]);
-    	return $pdf->download('laporan-transaksi-pdf');
     }
 
     public function maxkode()

@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 //kategori punya
@@ -25,8 +28,6 @@ Route::post('/kategori', 'KategoriController@prosestambah')                     
 Route::get('/users/kategori/ubah/{KdKategori}', 'KategoriController@ubah')      ->name('ubahkategori');
 Route::post('/kategori/prosesubahkategori', 'KategoriController@prosesubah')    ->name('prosesubahkategori');
 Route::get('/users/kategori/delete/{KdKategori}', 'KategoriController@hapus');
-Route::get('/users/kategori/cetak_pdf', 'KategoriController@cetak_pdf')          ->name('pdf');
-Route::get('/user/kategori/export_excel', 'KategoriController@export_excel')                ->name('excel');
 
 
 
@@ -48,6 +49,7 @@ Route::get('/users/barang/delete/{KdBrg}', 'BarangController@hapus');
 // Transaction Punya
 Route::get('/transaction', 'TransactionController@index')                       ->name('transaction');
 Route::post('/transaction', 'TransactionController@prosestambah')               ->name('tambahtransaction');
+Route::post('/transaction/tambahkeranjang', 'TransactionController@tambahkeranjang')               ->name('tambahkeranjang');
 
 
 
@@ -55,3 +57,13 @@ Route::post('/transaction', 'TransactionController@prosestambah')               
 // Request Ajax
 Route::post('/transaction/barang', 'ajax\AjaxController@caribarang');
 Route::post('/transaction/pelanggan', 'ajax\AjaxController@caripelanggan');
+
+// Report
+
+Route::get('/users/kategori/cetak_pdf', 'ReportController@cetak_pdf')          ->name('pdf');
+Route::get('/user/kategori/export_excel', 'ReportController@export_excel')     ->name('excel');
+
+
+// Chart
+
+Route::get('/dashboard', 'UserChartController@index')                           ->name('chart');

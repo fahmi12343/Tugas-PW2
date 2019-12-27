@@ -2,16 +2,16 @@
 
 namespace App\Exports;
 
-use App\Kategori;
+use App\view\view;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class KategoriExport implements FromCollection
+class PembelianExport implements FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Kategori::all();
+        return view::all();
     }
 }
