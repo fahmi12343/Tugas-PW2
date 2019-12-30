@@ -19,6 +19,11 @@ class UserChartController extends Controller
 
         // $view = view::all();
 
+        $view = DB::table('v_pembelian')
+                        ->select('NmBrg','JmlPesan',DB::raw('count(*) as JmlPesan'))
+                        ->groupBy('NmBrg','JmlPesan')
+                        ->get();
+
         $view = view::all();
 
         // mengambil data view
@@ -27,7 +32,7 @@ class UserChartController extends Controller
 
         foreach ($view as $views) {
 
-            $Catagories[]   = $views->TglPesan;
+            $Catagories[]   = $views->NmBrg;
             $Data[]         = $views->JmlPesan;
 
         }

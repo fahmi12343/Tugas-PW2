@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    protected $table = 'buktipesan';
+    protected $table = 'penjualan';
     protected $guarded=[];
 
     //menjadikan kd_matkul primary key

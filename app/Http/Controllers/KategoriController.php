@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\KategoriExport;
 use Illuminate\Http\Request;
 use App\Kategori;
 use App\Http\Controllers\Controller;
 use Exception;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KategoriController extends Controller
 {
@@ -14,6 +14,11 @@ class KategoriController extends Controller
     {
 
         // $kategori   = DB::table('kategori')->simplePaginate(10);
+
+
+            // Alert::success('Success!', Session('Success Message'));
+
+
 
         $kategori   = Kategori::paginate(10);
         $kd = $this->maxkode();
@@ -49,6 +54,7 @@ class KategoriController extends Controller
         return redirect()->route('kategori.index')
                          ->with('success', 'Show is successfully saved');
 
+
     }
 
     function prosestambah(Request $request)
@@ -66,6 +72,7 @@ class KategoriController extends Controller
 
         if($kategori->save())
         {
+            Alert::success('Data Success Added!', Session('Success Message'));
             return redirect()->route('kategori')
                              ->with('success', 'Show is successfully saved');
         }
@@ -95,8 +102,11 @@ class KategoriController extends Controller
         if($kategori->save())
         {
             // panggil function index
+            Alert::success('Data Success Update!', Session('Success Message'));
             return redirect()->route('kategori')
                              ->with('success', 'Show is successfully saved');
+
+
         }
     }
 
@@ -111,8 +121,9 @@ class KategoriController extends Controller
                     // return redirect()->route('kategori');
 
                 // panggil function index
+                Alert::success('Data Success Deleted!', Session('Success Message'));
                 return redirect()->route('kategori')
-                                 ->with('success', 'Show is successfully saved');
+                                 ->with('success', 'Show is successfully delete');
             }
         }
         catch(Exception $x) {

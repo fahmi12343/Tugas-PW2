@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pelanggan;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PelangganController extends Controller
 {
@@ -87,6 +88,7 @@ class PelangganController extends Controller
 
         if($pelanggan->save())
         {
+            Alert::success('Data Success Added!', Session('Success Message'));
             return redirect()->route('pelanggan')
                              ->with('success', 'Show is successfully saved');
         }
@@ -112,6 +114,7 @@ class PelangganController extends Controller
         if($pelanggan->save())
         {
             // panggil function index
+            Alert::success('Data Success Updated!', Session('Success Message'));
             return redirect()->route('pelanggan')
                              ->with('success', 'Show is successfully saved');
         }
@@ -127,6 +130,7 @@ class PelangganController extends Controller
                 // return redirect()->route('kategori');
 
             // panggil function index
+            Alert::success('Data Success Deleted!', Session('Success Message'));
             return redirect()->route('pelanggan')
                              ->with('success', 'Show is successfully saved');
         }

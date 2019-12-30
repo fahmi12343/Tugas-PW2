@@ -9,6 +9,8 @@ use App\Pelanggan;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
+use Symfony\Component\Translation\Translator;
 
 class TransactionController extends Controller
 {
@@ -24,7 +26,8 @@ class TransactionController extends Controller
         $pelanggan = Pelanggan::all();
 
        // $barang = Barang::paginate(2);
-       $kd = $this->maxkode();
+
+        $kd = $this->maxkode();
 
 
        if(!empty($request->session()->get('keranjang'))) {
@@ -37,8 +40,8 @@ class TransactionController extends Controller
        // mengirim data kategori ke view index
        return view('users.transaction.index',['transaction' => $transaction])
        ->with('keranjang',$keranjang)
-       ->with('kd',$kd)
        ->with('barang',$barang)
+       ->with('kd',$kd)
        ->with('pelanggan',$pelanggan);
 
 
@@ -62,14 +65,14 @@ class TransactionController extends Controller
         }
         else {
             $array =    array(
-                                array(
-                                    $request  -> get('NoPesan'),
-                                    $request  -> get('KdBrg'),
-                                    $request  -> get('HargaBrg'),
-                                    $request  -> get('JmlPesan'),
-                                    $request  -> get('TglPesan'),
-                                    $request  -> get('KdPlg')
-                                )
+                            array(
+                                $request  -> get('NoPesan'),
+                                $request  -> get('KdBrg'),
+                                $request  -> get('HargaBrg'),
+                                $request  -> get('JmlPesan'),
+                                $request  -> get('TglPesan'),
+                                $request  -> get('KdPlg')
+                            )
             );
         }
 
@@ -121,6 +124,7 @@ class TransactionController extends Controller
 
         $request->session()->forget('keranjang');
 
+        Alert::success('Transaction Success!', Session('Success Message'));
         return redirect()->route('transaction')
                          ->with('success', 'Show is successfully saved');
 
@@ -143,5 +147,6 @@ class TransactionController extends Controller
         return $idevn;
 
     }
+
 
 }

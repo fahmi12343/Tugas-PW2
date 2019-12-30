@@ -2,6 +2,18 @@
 
 @section('content')
 
+            {{-- @if(Session::has('success'))
+                <div class="alert alert-success">
+                    {{Session::get('success')}}
+                </div>
+            @endif
+
+            @if(Session::has('fail'))
+                <div class="alert alert-danger">
+                {{Session::get('fail')}}
+                </div>
+            @endif --}}
+
     <br> <h2 align="center">List Kategori</h2> <br>
 
     <div class="container">
@@ -54,7 +66,7 @@
                                                                             <div class="form-group row">
                                                                                 <label for="NmKategori{{$nomor}}" class="col-md-4 col-form-label text-md-right">Nama Kategori</label>
                                                                                 <div class="col-md-6">
-                                                                                    <input id="NmKategori{{$nomor}}" type="text" value="{{ $kategories->NmKategori }}" class="form-control{{ $errors->has('NmKategori') ? ' is-invalid' : '' }}" maxlength="50" name="NmKategori" required autofocus>
+                                                                                    <input id="NmKategori{{$nomor}}"  type="text" value="{{ $kategories->NmKategori }}" class="form-control{{ $errors->has('NmKategori') ? ' is-invalid' : '' }}" maxlength="50" name="NmKategori" required autofocus>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row mb-0">
@@ -124,7 +136,7 @@
                                 <div class="form-group row">
                                     <label for="NmKategori" class="col-md-4 col-form-label text-md-right">Nama Kategori</label>
                                     <div class="col-md-6">
-                                        <input id="NmKategori" type="text" class="form-control{{ $errors->has('NmKategori') ? ' is-invalid' : '' }}" name="NmKategori" value="{{ old('NmKategori') }}" onkeypress="return huruf(event)" required autofocus>
+                                        <input id="NmKategori" type="text" class="form-control{{ $errors->has('NmKategori') ? ' is-invalid' : '' }}" name="NmKategori" value="{{ old('NmKategori') }}" maxlength="50" onkeypress="return huruf(event)" required autofocus>
                                         @if ($errors->has('NmKategori'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('NmKategori') }}</strong>
@@ -146,6 +158,8 @@
                 </div>
             </div>
         </div>
+
+
 
         <div class="container">
             <div class="row" style="margin: 1% ; padding: 1%">

@@ -1,5 +1,7 @@
 <?php $__env->startSection('content'); ?>
 
+            
+
     <br> <h2 align="center">List Kategori</h2> <br>
 
     <div class="container">
@@ -53,7 +55,7 @@
                                                                             <div class="form-group row">
                                                                                 <label for="NmKategori<?php echo e($nomor); ?>" class="col-md-4 col-form-label text-md-right">Nama Kategori</label>
                                                                                 <div class="col-md-6">
-                                                                                    <input id="NmKategori<?php echo e($nomor); ?>" type="text" value="<?php echo e($kategories->NmKategori); ?>" class="form-control<?php echo e($errors->has('NmKategori') ? ' is-invalid' : ''); ?>" maxlength="50" name="NmKategori" required autofocus>
+                                                                                    <input id="NmKategori<?php echo e($nomor); ?>"  type="text" value="<?php echo e($kategories->NmKategori); ?>" class="form-control<?php echo e($errors->has('NmKategori') ? ' is-invalid' : ''); ?>" maxlength="50" name="NmKategori" required autofocus>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row mb-0">
@@ -123,7 +125,7 @@
                                 <div class="form-group row">
                                     <label for="NmKategori" class="col-md-4 col-form-label text-md-right">Nama Kategori</label>
                                     <div class="col-md-6">
-                                        <input id="NmKategori" type="text" class="form-control<?php echo e($errors->has('NmKategori') ? ' is-invalid' : ''); ?>" name="NmKategori" value="<?php echo e(old('NmKategori')); ?>" onkeypress="return huruf(event)" required autofocus>
+                                        <input id="NmKategori" type="text" class="form-control<?php echo e($errors->has('NmKategori') ? ' is-invalid' : ''); ?>" name="NmKategori" value="<?php echo e(old('NmKategori')); ?>" maxlength="50" onkeypress="return huruf(event)" required autofocus>
                                         <?php if($errors->has('NmKategori')): ?>
                                             <span class="invalid-feedback" role="alert">
                                                 <strong><?php echo e($errors->first('NmKategori')); ?></strong>
@@ -146,6 +148,8 @@
                 </div>
             </div>
         </div>
+
+
 
         <div class="container">
             <div class="row" style="margin: 1% ; padding: 1%">

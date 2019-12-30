@@ -48,7 +48,7 @@
 
                                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                                 <div class="modal-content modal-lg">
-                                                                    <div class="modal-header"> Update Pelanggan </div>
+                                                                    <div class="modal-header"> Update Barang </div>
                                                                         <div class="modal-body">
                                                                             <form method="POST" action="<?php echo e(route('prosesubahbarang')); ?>">
                                                                             <?php echo e(csrf_field()); ?>
@@ -68,7 +68,7 @@
                                                                                 </div>
 
                                                                                 <div class="form-group row">
-                                                                                    <label for="NmBrg" class="col-md-4 col-form-label text-md-right">Nama Pelanggan</label>
+                                                                                    <label for="NmBrg" class="col-md-4 col-form-label text-md-right">Nama Barang</label>
                                                                                     <div class="col-md-6">
                                                                                         <input id="NmBrg" type="text" value="<?php echo e($joins->NmBrg); ?>" class="form-control<?php echo e($errors->has('NmBrg') ? ' is-invalid' : ''); ?>" name="NmBrg" value="<?php echo e(old('NmBrg')); ?>" maxlength="50" onkeypress="return huruf(event)" required autofocus>
                                                                                         <?php if($errors->has('NmBrg')): ?>
@@ -119,6 +119,8 @@
                                                                                     <label for="Stok" class="col-md-4 col-form-label text-md-right">Nama Kategori</label>
                                                                                     <div class="col-md-6">
                                                                                         <select class="form-control" name="KdKategori" required>
+                                                                                            <option value="" selected disabled>--Pilih Pelanggan--</option>
+
                                                                                             <?php $__currentLoopData = $kategori; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kategories): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                                                 <option value="<?php echo e($kategories -> KdKategori); ?>"  <?php echo e(($joins -> KdKategori ==  $kategories -> KdKategori) ? 'selected' : ''); ?>><?php echo e($kategories -> NmKategori); ?></option>
                                                                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -196,7 +198,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="NmBrg" class="col-md-4 col-form-label text-md-right">Nama Pelanggan</label>
+                                        <label for="NmBrg" class="col-md-4 col-form-label text-md-right">Nama Barang</label>
                                         <div class="col-md-6">
                                             <input id="NmBrg" type="text" class="form-control<?php echo e($errors->has('NmBrg') ? ' is-invalid' : ''); ?>" name="NmBrg" value="<?php echo e(old('NmBrg')); ?>" maxlength="50" onkeypress="return huruf(event)" required autofocus>
                                             <?php if($errors->has('NmBrg')): ?>
@@ -247,6 +249,8 @@
                                         <label for="Stok" class="col-md-4 col-form-label text-md-right">Nama Kategori</label>
                                         <div class="col-md-6">
                                             <select class="form-control" name="KdKategori" required>
+                                                <option value="" selected disabled>--Pilih Pelanggan--</option>
+
                                                 <?php $__currentLoopData = $kategori; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kategories): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <option value="<?php echo e($kategories -> KdKategori); ?>"><?php echo e($kategories -> NmKategori); ?> </option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -50,7 +50,7 @@
 
                                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                                 <div class="modal-content modal-lg">
-                                                                    <div class="modal-header"> Update Pelanggan </div>
+                                                                    <div class="modal-header"> Update Barang </div>
                                                                         <div class="modal-body">
                                                                             <form method="POST" action="{{route('prosesubahbarang')}}">
                                                                             {{ csrf_field() }}
@@ -69,7 +69,7 @@
                                                                                 </div>
 
                                                                                 <div class="form-group row">
-                                                                                    <label for="NmBrg" class="col-md-4 col-form-label text-md-right">Nama Pelanggan</label>
+                                                                                    <label for="NmBrg" class="col-md-4 col-form-label text-md-right">Nama Barang</label>
                                                                                     <div class="col-md-6">
                                                                                         <input id="NmBrg" type="text" value="{{ $joins->NmBrg }}" class="form-control{{ $errors->has('NmBrg') ? ' is-invalid' : '' }}" name="NmBrg" value="{{ old('NmBrg') }}" maxlength="50" onkeypress="return huruf(event)" required autofocus>
                                                                                         @if ($errors->has('NmBrg'))
@@ -120,6 +120,8 @@
                                                                                     <label for="Stok" class="col-md-4 col-form-label text-md-right">Nama Kategori</label>
                                                                                     <div class="col-md-6">
                                                                                         <select class="form-control" name="KdKategori" required>
+                                                                                            <option value="" selected disabled>--Pilih Pelanggan--</option>
+
                                                                                             @foreach ($kategori as $kategories)
                                                                                                 <option value="{{ $kategories -> KdKategori }}"  {{ ($joins -> KdKategori ==  $kategories -> KdKategori) ? 'selected' : ''  }}>{{ $kategories -> NmKategori }}</option>
                                                                                             @endforeach
@@ -197,7 +199,7 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="NmBrg" class="col-md-4 col-form-label text-md-right">Nama Pelanggan</label>
+                                        <label for="NmBrg" class="col-md-4 col-form-label text-md-right">Nama Barang</label>
                                         <div class="col-md-6">
                                             <input id="NmBrg" type="text" class="form-control{{ $errors->has('NmBrg') ? ' is-invalid' : '' }}" name="NmBrg" value="{{ old('NmBrg') }}" maxlength="50" onkeypress="return huruf(event)" required autofocus>
                                             @if ($errors->has('NmBrg'))
@@ -248,6 +250,8 @@
                                         <label for="Stok" class="col-md-4 col-form-label text-md-right">Nama Kategori</label>
                                         <div class="col-md-6">
                                             <select class="form-control" name="KdKategori" required>
+                                                <option value="" selected disabled>--Pilih Pelanggan--</option>
+
                                                 @foreach ($kategori as $kategories)
                                                     <option value="{{ $kategories -> KdKategori }}">{{ $kategories -> NmKategori }} </option>
                                                 @endforeach

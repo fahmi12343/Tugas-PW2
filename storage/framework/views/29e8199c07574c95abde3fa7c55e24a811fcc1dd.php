@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/font-awesome.min.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/bootstrap.min.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/font-awesome.min.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 
     
 
@@ -137,6 +138,8 @@
     <script type="text/javascript" src="<?php echo e(asset('js/bootstrap.min.js')); ?>"></script>
     
 
+    <?php echo $__env->make('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
 
     <script >
         $(document).ready(function(){
@@ -204,6 +207,10 @@
                 })
 
         })
+
+
+
+
     </script>
 
 

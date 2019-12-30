@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"> --}}
 
@@ -133,6 +134,8 @@
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
     {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
 
     <script >
         $(document).ready(function(){
@@ -200,6 +203,10 @@
                 })
 
         })
+
+
+
+
     </script>
 
 

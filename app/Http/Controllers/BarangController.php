@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Barang;
 use App\Kategori;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BarangController extends Controller
 {
@@ -68,6 +69,7 @@ class BarangController extends Controller
 
         if($barang->save())
         {
+            Alert::success('Data Success Added!', Session('Success Message'));
             return redirect()->route('barang')
                              ->with('success', 'Show is successfully saved');
         }
@@ -97,6 +99,7 @@ class BarangController extends Controller
         if($barang->save())
         {
             // panggil function index
+            Alert::success('Data Success Updated!', Session('Success Message'));
             return redirect()->route('barang')
                              ->with('success', 'Show is successfully saved');
         }
@@ -107,15 +110,26 @@ class BarangController extends Controller
     {
         $barang    = Barang::find($id);
 
-        if($barang -> delete())
-        {
-            //panggil route
-                // return redirect()->route('kategori');
 
-            // panggil function index
-            return redirect()->route('barang')
-                             ->with('success', 'Show is successfully saved');
+        try {
+
+            if($barang -> delete())
+                {
+                    //panggil route
+                        // return redirect()->route('kategori');
+
+                    // panggil function index
+                    Alert::success('Data Success Deleted!', Session('Success Message'));
+                    return redirect()->route('barang')
+                                    ->with('success', 'Show is successfully saved');
+                }
+        } catch (\Throwable $th) {
+                echo "  <script>
+                            alert('DATA SEDANG DIGUNAKAN Di RELASI DETAIL.');
+                            window.history.back();
+                        </script>";
         }
+
 
     }
 

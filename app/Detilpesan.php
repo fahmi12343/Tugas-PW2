@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Detilpesan extends Model
 {
-    protected $table = 'detilpesan';
+    protected $table = 'detilpenjualan';
     protected $guarded=[];
 
     //menonaktifkan angka
